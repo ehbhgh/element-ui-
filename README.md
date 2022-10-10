@@ -1,19 +1,24 @@
-# wstest
+# Secondary encapsulation of element ui
 
-## Project setup
+## 安装前台依赖
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+yarn
 ```
 
-### Compiles and minifies for production
+## 启动前台项目
 ```
-npm run build
+yarn start
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## 打包前台项目
+```
+yarn build
+```
+
+## 启动后台服务
+```
+yarn serve
+```
+
+## Email
+联系：2338287783@qq.com
