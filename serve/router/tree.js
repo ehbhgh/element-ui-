@@ -27,4 +27,34 @@ router.get('/deleteTreeList/:id', (req, res) => {
 
 })
 
+router.post('/modifyTreeList', (req, res) => {
+    const {data}=req.body
+   let id=parseInt(data.id)
+   let name=data.name;
+   readFile((data) => {
+    let {
+        parent,
+        children
+    } = data
+ parent.forEach(item => {
+          if(item.id==id){
+            item.name=name
+          }
+    })
+children.forEach(item => {
+        if(item.id==id){
+          item.name=name
+        }
+  })
+
+  data.parent = parent;
+  data.children = children;
+  let json = JSON.stringify(data)
+  let msg='修改成功'
+  writeFile(json,res,msg)
+   
+})
+
+});
+
 module.exports=router

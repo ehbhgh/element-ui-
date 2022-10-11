@@ -6,12 +6,13 @@
       :fileDrop="fileDrop"
       :directoryDrop="directoryDrop"
       :delete="deleteItem"
+      :modify="modifyItem"
     ></ws-tree>
   </div>
 </template>
 
 <script>
-import { getTreeList, deleteTreeList } from "../api/index";
+import { getTreeList, deleteTreeList,modifyTreeList } from "../api/index";
 import WsTree from "../components/WsTree.vue";
 export default {
   name: "Tree",
@@ -37,7 +38,7 @@ export default {
         data:{ parent,children}
       } = await getTreeList();
       // console.log(data,'ws')
-      parent.forEach((item) => (item.type = "parent"));
+      parent&&parent.forEach((item) => (item.type = "parent"));
       const allList = [...parent, ...children];
       this.treeList = allList;
     },
@@ -50,6 +51,20 @@ export default {
         });
       this.getTreeList();
     },
+
+
+    async modifyItem(id,name){
+      const params={
+        id,
+        name
+      }
+      let data=await modifyTreeList(params)
+      this.$message({
+          message: data.data.msg,
+          type: 'success'
+        });
+      this.getTreeList();
+    }
   },
 };
 </script>

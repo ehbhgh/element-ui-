@@ -31,6 +31,10 @@ export default {
       type: Function,
       default: () => {},
     },
+    modify:{
+      type: Function,
+      default: () => {},
+    }
   },
   mounted() {
     this.getTreeList();
@@ -86,6 +90,11 @@ export default {
     },
 
     sure(data) {
+      this.modify? this.modify(data.id,this.currentContent).then(res=>{
+        this.currentId = ''
+      }):this.modifyItem()
+    },
+    modifyItem(){
       let list = _.cloneDeep(this.data).find((item) => item.id === data.id);
       list.name = this.currentContent;
       this.currentId = "";
